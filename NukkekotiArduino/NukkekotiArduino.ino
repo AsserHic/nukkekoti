@@ -5,6 +5,9 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
+#include "Valovastus.h"
+#include "Varina.h"
+
 FASTLED_USING_NAMESPACE
 
 // Rakenteelliset parametrit
@@ -23,15 +26,16 @@ FASTLED_USING_NAMESPACE
 CRGB leds[LEDIEN_MAARA];
 uint8_t gHue = 0;
 
+Valovastus valovastus1 = Valovastus(VALOVASTUS_1);
+Valovastus valovastus2 = Valovastus(VALOVASTUS_2);
+
+Varina varina = Varina(VARINAMOOTTORI);
+
 /*
  Alustusrutiini, joka ajetaan vain kerran.
  */
 void setup() {
   pinMode(VALAISTUS_TILA, INPUT);
-  pinMode(VALOVASTUS_1,   INPUT);
-  pinMode(VALOVASTUS_2,   INPUT);
-
-  pinMode(VARINAMOOTTORI, OUTPUT);
 
   delay(3000); // Kaynnistysviive
   FastLED.addLeds<LEDIEN_TYYPPI,
@@ -53,6 +57,8 @@ void loop() {
   }
   FastLED.show();
   FastLED.delay(100);
+
+  varina.seuraavaAskel();
 }
 
 boolean onValotPaalla() {
