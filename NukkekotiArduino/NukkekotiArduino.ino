@@ -47,7 +47,10 @@ void setup() {
  Ohjelman toiminnasta huolehtiva paattymaton silmukka.
  */
 void loop() {
-  if (onValotPaalla()) {
+  boolean valoisaa1 = valovastus1.valoisaa();
+  boolean valoisaa2 = valovastus2.valoisaa();
+
+  if (onValotPaalla() || (valoisaa1 && valoisaa2)) {
     FastLED.setBrightness(0);
 
   } else { // Valot poissa paalta
@@ -64,4 +67,3 @@ void loop() {
 boolean onValotPaalla() {
   return digitalRead(VALAISTUS_TILA);
 }
-

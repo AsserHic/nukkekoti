@@ -9,7 +9,7 @@ Valovastus::Valovastus(int pin) {
 }
 
 boolean Valovastus::valoisaa() {
-   return kuinkaValoisaa() > 5;
+   return kuinkaValoisaa() > 4;
 }
 
 int Valovastus::kuinkaValoisaa() {
