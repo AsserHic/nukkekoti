@@ -6,11 +6,15 @@ class Varina {
   private:
 
      int m_pin;
-     int m_askellaskuri;
+     int m_paalla;
 
   public:
 
      Varina(int pin);
+
+     void liikuta(int vauhti);
+
+     void sammuta();
 
      void seuraavaAskel();
 

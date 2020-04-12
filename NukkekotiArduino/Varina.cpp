@@ -4,19 +4,29 @@
 
 Varina::Varina(int pin) {
   m_pin = pin;
-  m_askellaskuri = 0;
+  m_paalla = false;
 
   pinMode(m_pin, OUTPUT);
 }
 
+void Varina::sammuta() {
+   m_paalla = false;
+   digitalWrite(m_pin, LOW);
+}
+
+void Varina::liikuta(int vauhti=8) {
+   m_paalla = true;
+   analogWrite(m_pin, map(vauhti, 0, 9, 150, 250));
+}
+
 void Varina::seuraavaAskel() {
-   m_askellaskuri++;
-   
-   if (m_askellaskuri == 1050) {
-     digitalWrite(m_pin, LOW);
-     m_askellaskuri = 0;
-   } else
-   if (m_askellaskuri > 1000) {
-     analogWrite(m_pin, map(m_askellaskuri, 1000, 1050, 100, 200));
+   if (m_paalla) {
+      if (random(20) < 1) {
+         sammuta();
+      } else {
+         liikuta(random(10));
+      }
+   } else if (random(800) < 1) {
+      liikuta();
    }
 }
