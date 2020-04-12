@@ -12,10 +12,11 @@ boolean Valovastus::valoisaa() {
    return kuinkaValoisaa() > 5;
 }
 
-int kuinkaValoisaa() {
+int Valovastus::kuinkaValoisaa() {
   int mittaus = analogRead(m_pin);
 
   m_min = min(m_min, mittaus);
   m_max = max(m_max, mittaus);
   
   return map(mittaus, m_min, m_max, 0, 9);
+}
