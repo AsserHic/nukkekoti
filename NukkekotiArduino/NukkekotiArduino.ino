@@ -19,6 +19,7 @@ FASTLED_USING_NAMESPACE
 // Arduinon nastat:
 #define LED_NAUHAN_OHJAUS 4
 #define VARINAMOOTTORI    5
+#define KATTOVALAISIN     12
 #define VALAISTUS_TILA    A3
 #define VALOVASTUS_1      A1
 #define VALOVASTUS_2      A2
@@ -36,6 +37,9 @@ Varina varina = Varina(VARINAMOOTTORI);
  */
 void setup() {
   pinMode(VALAISTUS_TILA, INPUT);
+  pinMode(KATTOVALAISIN, OUTPUT);
+
+  digitalWrite(KATTOVALAISIN, false);
 
   delay(3000); // Kaynnistysviive
   FastLED.addLeds<LEDIEN_TYYPPI,
@@ -61,6 +65,8 @@ void loop() {
   }
   FastLED.show();
   FastLED.delay(100);
+
+  digitalWrite(KATTOVALAISIN, valoisaa2);
 
   if (valot) {
      varina.seuraavaAskel();
