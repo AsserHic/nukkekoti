@@ -66,7 +66,7 @@ void loop() {
   FastLED.show();
   FastLED.delay(100);
 
-  digitalWrite(KATTOVALAISIN, valoisaa2);
+  digitalWrite(KATTOVALAISIN, !(valoisaa2 || valot));
 
   if (valot) {
      varina.seuraavaAskel();
