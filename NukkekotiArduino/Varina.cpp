@@ -25,7 +25,7 @@ void Varina::liikuta(int vauhti) {
 
 void Varina::seuraavaAskel() {
    if (m_paalla) {
-      if (random(30) < 1) {
+      if (random(10) < 1) {
          sammuta();
       } else {
          liikuta(random(10));
