@@ -55,7 +55,7 @@ void loop() {
   boolean valoisaa2 = valovastus2.valoisaa();
   boolean valot     = onValotPaalla();
 
-  if (valot || (valoisaa1 && valoisaa2)) {
+  if (valot || valoisaa2) {
     FastLED.setBrightness(0);
 
   } else { // Valot poissa paalta
@@ -69,14 +69,12 @@ void loop() {
   FastLED.show();
   FastLED.delay(100);
 
-  if (kattovalo.seuraavaAskel(!valoisaa2)) {
+  if (kattovalo.seuraavaAskel(!valoisaa1)) {
      varina.liikuta();
   }
 
-  if (valot) {
+  if (valot || varina.paalla()) {
      varina.seuraavaAskel();
-  } else {
-     varina.sammuta();
   }
 }
 

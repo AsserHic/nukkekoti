@@ -28,7 +28,7 @@ boolean Kattovalo::seuraavaAskel(boolean pimeaa) {
          sammuta();
       } else if (arpa < 20) {
          digitalWrite(m_pin, LOW);
-         touhua = !pimeaa && (arpa > 300);
+         touhua = !pimeaa && (arpa < 8);
       } else if (arpa > 400) {
          digitalWrite(m_pin, HIGH);
       }
