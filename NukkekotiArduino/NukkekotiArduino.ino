@@ -5,6 +5,7 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
+#include "Kattovalo.h"
 #include "Valovastus.h"
 #include "Varina.h"
 
@@ -27,6 +28,8 @@ FASTLED_USING_NAMESPACE
 CRGB leds[LEDIEN_MAARA];
 uint8_t gHue = 0;
 
+Kattovalo kattovalo = Kattovalo(KATTOVALAISIN);
+
 Valovastus valovastus1 = Valovastus(VALOVASTUS_1);
 Valovastus valovastus2 = Valovastus(VALOVASTUS_2);
 
@@ -37,9 +40,6 @@ Varina varina = Varina(VARINAMOOTTORI);
  */
 void setup() {
   pinMode(VALAISTUS_TILA, INPUT);
-  pinMode(KATTOVALAISIN, OUTPUT);
-
-  digitalWrite(KATTOVALAISIN, false);
 
   delay(3000); // Kaynnistysviive
   FastLED.addLeds<LEDIEN_TYYPPI,
@@ -63,10 +63,15 @@ void loop() {
     fill_rainbow(leds, LEDIEN_MAARA, gHue, 7);
     EVERY_N_MILLISECONDS(20) { gHue++; }
   }
+  if (varina.paalla()) {
+    leds[random16(LEDIEN_MAARA)] += CRGB::White;
+  }
   FastLED.show();
   FastLED.delay(100);
 
-  digitalWrite(KATTOVALAISIN, !(valoisaa2 || valot));
+  if (kattovalo.seuraavaAskel(!valoisaa2)) {
+     varina.liikuta();
+  }
 
   if (valot) {
      varina.seuraavaAskel();

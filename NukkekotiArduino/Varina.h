@@ -12,7 +12,9 @@ class Varina {
 
      Varina(int pin);
 
-     void liikuta(int vauhti);
+     boolean paalla();
+
+     void liikuta(int vauhti=8);
 
      void sammuta();
 

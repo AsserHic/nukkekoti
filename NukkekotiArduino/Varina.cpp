@@ -9,19 +9,23 @@ Varina::Varina(int pin) {
   pinMode(m_pin, OUTPUT);
 }
 
+boolean Varina::paalla() {
+  return m_paalla;
+}
+
 void Varina::sammuta() {
    m_paalla = false;
    digitalWrite(m_pin, LOW);
 }
 
-void Varina::liikuta(int vauhti=8) {
+void Varina::liikuta(int vauhti) {
    m_paalla = true;
    analogWrite(m_pin, map(vauhti, 0, 9, 150, 250));
 }
 
 void Varina::seuraavaAskel() {
    if (m_paalla) {
-      if (random(20) < 1) {
+      if (random(30) < 1) {
          sammuta();
       } else {
          liikuta(random(10));
