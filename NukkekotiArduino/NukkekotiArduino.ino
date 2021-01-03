@@ -30,7 +30,7 @@ uint8_t gHue = 0;
 
 Kattovalo kattovalo = Kattovalo(KATTOVALAISIN);
 
-Valovastus valovastus1 = Valovastus(VALOVASTUS_1);
+Valovastus valovastus1 = Valovastus(VALOVASTUS_1, 3);
 Valovastus valovastus2 = Valovastus(VALOVASTUS_2);
 
 Varina varina = Varina(VARINAMOOTTORI);
@@ -45,6 +45,8 @@ void setup() {
   FastLED.addLeds<LEDIEN_TYYPPI,
                   LED_NAUHAN_OHJAUS,
                   LEDIEN_VARIT>(leds, LEDIEN_MAARA).setCorrection(TypicalLEDStrip);
+
+  varina.liikuta();
 }
 
 /*
@@ -58,7 +60,7 @@ void loop() {
   if (valot || valoisaa2) {
     FastLED.setBrightness(0);
 
-  } else { // Valot poissa paalta
+  } else { // Valot poissa paalta ja pimeaa
     FastLED.setBrightness(LEDIEN_KIRKKAUS);
     fill_rainbow(leds, LEDIEN_MAARA, gHue, 7);
     EVERY_N_MILLISECONDS(20) { gHue++; }

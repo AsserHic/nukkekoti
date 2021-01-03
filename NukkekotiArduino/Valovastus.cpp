@@ -2,14 +2,15 @@
 
 #include "Valovastus.h"
 
-Valovastus::Valovastus(int pin) {
+Valovastus::Valovastus(int pin, int threshold) {
   m_pin = pin;
+  m_threshold = threshold;
 
   pinMode(m_pin, INPUT);
 }
 
 boolean Valovastus::valoisaa() {
-   return kuinkaValoisaa() > 4;
+   return kuinkaValoisaa() > m_threshold;
 }
 
 int Valovastus::kuinkaValoisaa() {

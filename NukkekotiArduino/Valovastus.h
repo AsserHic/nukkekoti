@@ -8,10 +8,11 @@ class Valovastus {
      int m_pin;
      int m_min;
      int m_max;
+     int m_threshold;
 
   public:
 
-     Valovastus(int pin);
+     Valovastus(int pin, int threshold=4);
 
      boolean valoisaa();
 
